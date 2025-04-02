@@ -1,17 +1,16 @@
-import express, {Express, Request, Response} from 'express';
+import express, { Express, Request, Response } from "express";
+import evaluadoRouter from './src/routes';
 
-const app:Express = express();
-const morgan = require('morgan')
-
+const app: Express = express();
+const morgan = require('morgan');
 const port = 3000;
 
-app.use(morgan('dev'))
+app.use(morgan('dev'));
+app.use(express.json()); 
+app.use(evaluadoRouter);
 
-app.get('/', (req:Request, res:Response) => { 
-   res.send('Estas en la ruta raíz de la API') 
-}) 
-app.listen(port, () => { 
-console.log(`Example app listening on port ${port}`) 
-}) 
+app.listen(port, () => {
+console.log(`Example app listening on port ${port}`);
+});
 
 
