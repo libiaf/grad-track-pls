@@ -1,16 +1,25 @@
-import express, {Express, Request, Response} from 'express';
+import { Sequelize } from "sequelize-typescript";
 
-const app:Express = express();
-const morgan = require('morgan')
 
-const port = 3000;
+const connection = new Sequelize({
+  database: 'gradtrack_db',
+  dialect: 'mysql',
+  username: 'root',
+  password: '123456',
+  storage: ':memory:',
+  models: [
 
-app.use(morgan('dev'))
+  ]
+});
 
-app.get('/', (req:Request, res:Response) => { 
-   res.send('Hello Typescript!') 
-}) 
-app.listen(port, () => { 
-console.log(`Example app listening on port ${port}`) 
-}) 
+async function connectionDB() {
+  try {
+    await connection.authenticate();
+    console.log("Conexión a la base de datos establecida con éxito.");
+    await connection.sync();
+  } catch (e) {
+    console.log(e);
+  }
+}
 
+export default connectionDB;
