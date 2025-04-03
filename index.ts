@@ -13,13 +13,7 @@ const connection = new Sequelize({
 });
 
 async function connectionDB() {
-  try {
-    await connection.authenticate();
-    console.log("Conexión a la base de datos establecida con éxito.");
-    await connection.sync();
-  } catch (e) {
-    console.log(e);
-  }
+  console.log("hola");
 }
 
 export default connectionDB;
